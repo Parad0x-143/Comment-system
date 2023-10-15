@@ -11,19 +11,44 @@
     <button onclick="loadContent()">Load Content</button>
 
     <script>
-      function loadContent() {
-    var xhr = new XMLHttpRequest();
+        // An array to store the loaded content and its associated state
+        var contentHistory = [];
 
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState == 4 && xhr.status == 200) {
-            // Update the content-container with the fetched content
-            document.getElementById("content-container").innerHTML = xhr.responseText;
+        function loadContent() {
+            var xhr = new XMLHttpRequest();
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    // Store the current content and URL in the history array
+                    contentHistory.push({
+                        content: document.getElementById("content-container").innerHTML,
+                        url: window.location.href
+                    });
+
+                    // Update the content-container with the fetched content
+                    document.getElementById("content-container").innerHTML = xhr.responseText;
+
+                    // Push a new state into the browser's history
+                    var newState = {
+                        content: xhr.responseText,
+                        url: "nextpage.html"
+                    };
+                    history.pushState(newState, "", "nextpage.html");
+                }
+            };
+
+            xhr.open("GET", "nextpage.html", true);
+            xhr.send();
         }
-    };
 
-    xhr.open("GET", "nextpage.html", true);
-    xhr.send();
-      }
-    </script>
+        // Handle the browser's back button
+        window.onpopstate = function (event) {
+            if (event.state) {
+                document.getElementById("content-container").innerHTML = event.state.content;
+                // You can also update the URL if necessary
+                // window.history.pushState(event.state, "", event.state.url);
+            }
+        };
+                    </script>
 </body>
 </html>
