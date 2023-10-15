@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Load Content Without Refresh</title>
+</head>
+<body>
+    <h1>Welcome to My Website</h1>
+    <div id="content-container">
+        <!-- Content will be loaded here -->
+    </div>
+    <button onclick="loadContent()">Load Content</button>
+
+    <script>
+      function loadContent() {
+    var xhr = new XMLHttpRequest();
+
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            // Update the content-container with the fetched content
+            document.getElementById("content-container").innerHTML = xhr.responseText;
+        }
+    };
+
+    xhr.open("GET", "nextpage.html", true);
+    xhr.send();
+      }
+    </script>
+</body>
+</html>
