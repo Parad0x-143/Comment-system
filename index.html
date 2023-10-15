@@ -45,6 +45,7 @@
         window.onpopstate = function (event) {
             if (event.state) {
                 document.getElementById("content-container").innerHTML = event.state.content;
+                window.history.pushState(event.state, "", event.state.url);
                 // You can also update the URL if necessary
                 // window.history.pushState(event.state, "", event.state.url);
             }
