@@ -1,3 +1,4 @@
+<iframe>
 <?php
 	
 	include 'config.php';
@@ -18,6 +19,7 @@
 	}
 
 ?>
+</iframe>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -39,6 +41,7 @@
 	</div>
 
 	<div class="content">
+		<iframe>
 		<?php
 
 			$sql = "SELECT * FROM comments";
@@ -53,6 +56,7 @@
 		<p><?php echo $row['message']; ?></p>
 
 		<?php } } ?>
+		</iframe>
 	</div>
 </body>
 </html>
