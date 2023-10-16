@@ -31,13 +31,13 @@
                     // Push a new state into the browser's history
                     var newState = {
                         content: xhr.responseText,
-                        url: "nextpage.html"
+                        url: "content.html"
                     };
-                    history.pushState(newState, "", "nextpage.html");
+                    history.pushState(newState, "", "content.html");
                 }
             };
 
-            xhr.open("GET", "nextpage.html", true);
+            xhr.open("GET", "content.html", true);
             xhr.send();
         }
 
@@ -45,11 +45,10 @@
         window.onpopstate = function (event) {
             if (event.state) {
                 document.getElementById("content-container").innerHTML = event.state.content;
-                window.history.pushState(event.state, "", event.state.url);
                 // You can also update the URL if necessary
                 // window.history.pushState(event.state, "", event.state.url);
             }
         };
-                    </script>
+    </script>
 </body>
 </html>
